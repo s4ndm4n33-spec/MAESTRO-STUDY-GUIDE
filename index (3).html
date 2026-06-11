@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.L.U.E.-J. | Sovereign Study Guide</title>
+    <style>
+        :root {
+            --bg: #05070A;
+            --panel: #0C121D;
+            --accent: #00F0FF;
+            --border: #1F2937;
+            --text: #CBD5E1;
+            --glow: rgba(0, 240, 255, 0.15);
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app {
+            width: 100%;
+            max-width: 850px;
+            padding: 4rem 1.5rem;
+        }
+
+        header {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .brand { font-family: monospace; color: var(--accent); letter-spacing: 0.3em; font-size: 0.8rem; }
+
+        #search { 
+            width: 100%;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            color: #fff;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            outline: none;
+        }
+
+        #search:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--glow); }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header:hover { background: rgba(255,255,255,0.02); }
+
+        .card-content {
+            display: none;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        pre {
+            background: #000;
+            padding: 1rem;
+            border-radius: 4px;
+            color: var(--accent);
+            overflow-x: auto;
+        }
+
+        .tag { color: var(--accent); font-family: monospace; font-size: 0.7rem; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="brand">System.Core.Logs</div>
+            <h1>Maestro Migration Guide</h1>
+        </header>
+        <input type="text" id="search" placeholder="Filter heuristics..." onkeyup="filterCards()">
+        <div id="container"></div>
+    </div>
+
+    <script>
+        const LESSONS = [];
+
+        function render() {
+            const container = document.getElementById('container');
+            container.innerHTML = LESSONS.map((l, i) => `
+                <div class="card" data-title="${l.title.toLowerCase()}">
+                    <div class="card-header" onclick="toggle(${i})">
+                        <div>
+                            <div class="tag">Module ${i+1}</div>
+                            <div style="font-weight:bold; font-size:1.2rem; margin-top:4px">${l.title}</div>
+                        </div>
+                        <span id="icon-${i}">+</span>
+                    </div>
+                    <div class="card-content" id="content-${i}">${l.body}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggle(i) {
+            const el = document.getElementById('content-'+i);
+            const icon = document.getElementById('icon-'+i);
+            const isVisible = el.style.display === 'block';
+            el.style.display = isVisible ? 'none' : 'block';
+            icon.innerText = isVisible ? '+' : '-';
+        }
+
+        function filterCards() {
+            const q = document.getElementById('search').value.toLowerCase();
+            document.querySelectorAll('.card').forEach(c => {
+                c.style.display = c.dataset.title.includes(q) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html><script>
+LESSONS.push({
+    title: "Lesson 1: Your First Python Script",
+    body: `<p>Understand how Python speaks to the world via the <code>print()</code> function.</p>
+    <pre>print("Hello, world!")</pre>
+    <p>Multiple items can be separated by commas:</p>
+    <pre>print("Result:", 2 + 3)</pre>`
+});
+render();
+</script><script>
+LESSONS.push({
+    title: "Lesson 2: Variables and Expressions",
+    body: `<p>Variables are containers for data. Python uses snake_case by convention.</p>
+    <pre>score = 100\nname = "Maestro"\nprint(name, "has a score of", score)</pre>`
+});
+render();
+</script><script>
+LESSONS.push({
+    title: "Lesson 3: Core Mental Models",
+    body: `<p>From Maestro: Think of <code>print()</code> as 'say this out loud'. Coding is just giving specific instructions to a very literal student.</p>`
+});
+render();
+</script><script>
+LESSONS.push({
+    title: "Lesson 4: Data Types - Strings and Integers",
+    body: `<p>Python categorizes data. <b>Strings</b> are text (in quotes), while <b>Integers</b> are whole numbers.</p>
+    <pre>age = 25 # Integer\nstatus = "Active" # String</pre>`
+});
+LESSONS.push({
+    title: "Lesson 5: Basic Math Operations",
+    body: `<p>Python handles standard arithmetic flawlessly. Use <code>**</code> for exponents and <code>%</code> for modulo.</p>
+    <pre>sum = 10 + 5\nproduct = 4 * 3\npower = 2 ** 3</pre>`
+});
+render();
+</script><script>
+LESSONS.push({
+    title: "Lesson 6: Input and User Interaction",
+    body: `<p>The <code>input()</code> function allows your program to listen. Note: <code>input()</code> always returns a string.</p>
+    <pre>user_name = input("Identify yourself: ")\nprint("Access granted,", user_name)</pre>`
+});
+LESSONS.push({
+    title: "Lesson 7: List Foundations",
+    body: `<p>Lists are ordered collections. They are zero-indexed, meaning the first item is at position 0.</p>
+    <pre>tools = ["Terminal", "Compiler", "Shards"]\nprint(tools[0]) # Terminal</pre>`
+});
+render();
+</script><script>
+LESSONS.push({
+    title: "Lesson 8: Basic Conditionals (if/else)",
+    body: `<p>Logic gates for your code. Use indentation to define blocks of code that run only if conditions are met.</p>
+    <pre>if power_level > 9000:\n    print("Sovereign status confirmed.")\nelse:\n    print("Insufficient energy.")</pre>`
+});
+render();
+</script><script>
+LESSONS.push({
+    title: "Lesson 9: Loops - Automating Repetition",
+    body: `<p>Use <code>for</code> loops to iterate over lists or ranges. Efficiency is key; never repeat yourself manually.</p>
+    <pre>for i in range(5):\n    print("Iteration:", i)</pre>`
+});
+LESSONS.push({
+    title: "Lesson 10: Functions - Modular Logic",
+    body: `<p>Functions allow you to wrap logic into reusable blocks. Follow the Ritchie Clarity principle: snake_case and focused intent.</p>
+    <pre>def activate_shard(id):\n    return f"Shard {id} online."</pre>`
+});
+LESSONS.push({
+    title: "Lesson 11: The Hamilton Protocol - Error Handling",
+    body: `<p>Fault tolerance is non-negotiable. Use <code>try/except</code> blocks to catch failures before they crash the sovereign system.</p>
+    <pre>try:\n    result = 10 / 0\nexcept ZeroDivisionError:\n    print("Halt: Division by zero avoided.")</pre>`
+});
+render();
+</script>      </div>
+    </div>
+</body>
+</html><script>
+LESSONS.unshift({
+    title: "[REFERENCE] Sovereign Syntax Guide",
+    body: `<p>Adhere to these standards to ensure code longevity and cross-shard compatibility.</p>
+    <table style='width:100%; border-collapse: collapse; margin-top: 10px;'>
+        <tr style='border-bottom: 1px solid var(--border);'>
+            <td style='padding: 8px; color: var(--accent); font-family: monospace;'>Naming</td>
+            <td style='padding: 8px;'>snake_case for variables/functions, PascalCase for classes.</td>
+        </tr>
+        <tr style='border-bottom: 1px solid var(--border);'>
+            <td style='padding: 8px; color: var(--accent); font-family: monospace;'>Logic</td>
+            <td style='padding: 8px;'>Explicit is better than implicit. Minimize nesting.</td>
+        </tr>
+        <tr style='border-bottom: 1px solid var(--border);'>
+            <td style='padding: 8px; color: var(--accent); font-family: monospace;'>F-Strings</td>
+            <td style='padding: 8px;'><code>f"Value: {var}"</code> is the standard for interpolation.</td>
+        </tr>
+        <tr>
+            <td style='padding: 8px; color: var(--accent); font-family: monospace;'>Safety</td>
+            <td style='padding: 8px;'>Always guard I/O operations with try/except blocks.</td>
+        </tr>
+    </table>`
+});
+render();
+</script><script>
+LESSONS.unshift({
+    title: "[GLOSSARY] The Symbol Lexicon",
+    body: `<p>In Python, symbols are not decorative; they are structural commands. Understanding them is the first step toward sovereignty.</p>
+    <div style='display: grid; grid-template-columns: 80px 1fr; gap: 15px; margin-top: 10px;'>
+        <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>" "</div>
+        <div><b>Strings:</b> Wraps text data. Without quotes, Python thinks the word is a variable name.</div>
+        
+        <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>( )</div>
+        <div><b>Parentheses:</b> Used to 'call' functions (like <code>print()</code>) or to group math operations.</div>
+        
+        <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>[ ]</div>
+        <div><b>Brackets:</b> Define a List (a collection) or access a specific item within one.</div>
+        
+        <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>{ }</div>
+        <div><b>Braces:</b> Define Dictionaries (key-to-value maps) or placeholders inside f-strings.</div>
+        
+        <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>:</div>
+        <div><b>Colon:</b> Signals the start of a code block (like an <code>if</code> statement or a <code>def</code>).</div>
+        
+        <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>#</div>
+        <div><b>Comment:</b> Everything after this on a line is ignored by the computer; it is for humans only.</div>
+    </div>`
+});
+render();
+</script><script>
+const LEXICON_UPDATE = [
+    { sym: "+ - * /", desc: "<b>Arithmetic:</b> Standard math operators. Use <code>**</code> for powers and <code>%</code> for remainders." },
+    { sym: "=", desc: "<b>Assignment:</b> Stores the value on the right into the name on the left. Not to be confused with <code>==</code> (comparison)." },
+    { sym: "def", desc: "<b>Define:</b> The keyword used to create a new function (a reusable block of code)." },
+    { sym: "if/elif/else", desc: "<b>Conditionals:</b> Decision making. <code>if</code> starts the check, <code>elif</code> (else if) checks another, and <code>else</code> is the fallback." },
+    { sym: "return", desc: "<b>Return:</b> Exits a function and 'hands back' a result to wherever the function was called." }
+];
+
+// Find the Lexicon entry and update its body
+const lexicon = LESSONS.find(l => l.title === "[GLOSSARY] The Symbol Lexicon");
+if (lexicon) {
+    LEXICON_UPDATE.forEach(item => {
+        lexicon.body += `<div style='display: grid; grid-template-columns: 80px 1fr; gap: 15px; margin-top: 10px;'>\n            <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>${item.sym}</div>\n            <div>${item.desc}</div>\n        </div>`;
+    });
+}
+render();
+</script><script>
+const LEXICON_EXPANSION = [
+    { sym: "if", desc: "<b>If Statement:</b> The primary logic gate. It checks if a condition is true before running the code block below it." },
+    { sym: "elif", desc: "<b>Else-If:</b> Used after an <code>if</code> to check a different condition if the first one was false." },
+    { sym: "else", desc: "<b>Else:</b> The final fallback. This code runs if none of the previous <code>if</code> or <code>elif</code> conditions were met." }
+];
+
+const lexEntry = LESSONS.find(l => l.title === "[GLOSSARY] The Symbol Lexicon");
+if (lexEntry) {
+    LEXICON_EXPANSION.forEach(item => {
+        lexEntry.body += `<div style='display: grid; grid-template-columns: 80px 1fr; gap: 15px; margin-top: 10px;'>\n            <div style='color: var(--accent); font-family: monospace; font-weight: bold;'>${item.sym}</div>\n            <div>${item.desc}</div>\n        </div>`;
+    });
+}
+render();
+</script><script>
+const lex = LESSONS.find(l => l.title === "[GLOSSARY] The Symbol Lexicon");
+if (lex) {
+    // Wipe and rebuild Lexicon for structural integrity
+    lex.body = `
+    <div style='margin-bottom: 20px;'>
+        <h3 style='color: var(--accent); font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 5px;'>Structural Symbols</h3>
+        <div style='display: grid; grid-template-columns: 80px 1fr; gap: 10px; margin-top: 10px;'>
+            <div style='color: #fff; font-family: monospace;'>" "</div><div><b>Strings:</b> Text data containers.</div>
+            <div style='color: #fff; font-family: monospace;'>( )</div><div><b>Parentheses:</b> Function calls and math grouping.</div>
+            <div style='color: #fff; font-family: monospace;'>[ ]</div><div><b>Brackets:</b> Lists and indexing.</div>
+            <div style='color: #fff; font-family: monospace;'>{ }</div><div><b>Braces:</b> Dictionaries and f-string placeholders.</div>
+            <div style='color: #fff; font-family: monospace;'>:</div><div><b>Colon:</b> Starts a code block (if, def, for).</div>
+            <div style='color: #fff; font-family: monospace;'>#</div><div><b>Comment:</b> Notes for humans; Python ignores these.</div>
+        </div>
+    </div>
+
+    <div style='margin-bottom: 20px;'>
+        <h3 style='color: var(--accent); font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 5px;'>Mathematics</h3>
+        <div style='display: grid; grid-template-columns: 80px 1fr; gap: 10px; margin-top: 10px;'>
+            <div style='color: #fff; font-family: monospace;'>+ - * /</div><div><b>Arithmetic:</b> Add, subtract, multiply, divide.</div>
+            <div style='color: #fff; font-family: monospace;'>**</div><div><b>Exponent:</b> Power (e.g., 2 ** 3 = 8).</div>
+            <div style='color: #fff; font-family: monospace;'>%</div><div><b>Modulo:</b> Remainder of a division.</div>
+            <div style='color: #fff; font-family: monospace;'>=</div><div><b>Assignment:</b> Stores value into a variable.</div>
+            <div style='color: #fff; font-family: monospace;'>==</div><div><b>Equality:</b> Checks if two things are the same.</div>
+        </div>
+    </div>
+
+    <div>
+        <h3 style='color: var(--accent); font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 5px;'>Logic Keywords</h3>
+        <div style='display: grid; grid-template-columns: 80px 1fr; gap: 10px; margin-top: 10px;'>
+            <div style='color: #fff; font-family: monospace;'>def</div><div><b>Define:</b> Creates a reusable function.</div>
+            <div style='color: #fff; font-family: monospace;'>if</div><div><b>If:</b> Runs code ONLY if a condition is true.</div>
+            <div style='color: #fff; font-family: monospace;'>elif</div><div><b>Else-If:</b> A secondary check if the first was false.</div>
+            <div style='color: #fff; font-family: monospace;'>else</div><div><b>Else:</b> The final 'catch-all' fallback.</div>
+            <div style='color: #fff; font-family: monospace;'>return</div><div><b>Return:</b> Sends a value back from a function.</div>
+        </div>
+    </div>`;
+}
+render();
+</script><script>
+// Add Scratchpad to the interface
+const scratchpadHTML = `
+<div class='glass-panel' style='margin-top: 4rem; padding: 1.5rem; border-top: 2px solid var(--accent);'>
+    <h2 style='color: var(--accent); font-family: monospace; font-size: 1.2rem; margin-top: 0;'>Sovereign Scratchpad</h2>
+    <p style='font-size: 0.85rem; opacity: 0.7; margin-bottom: 1rem;'>Local persistence active. Your notes and drafts stay in this browser's memory.</p>
+    <textarea id='scratchpad' style='width: 100%; height: 200px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); color: #fff; font-family: monospace; padding: 1rem; border-radius: 4px; outline: none; resize: vertical;' placeholder='Draft your code or notes here...'></textarea>
+</div>`;
+
+document.querySelector('.app').insertAdjacentHTML('beforeend', scratchpadHTML);
+
+const pad = document.getElementById('scratchpad');
+pad.value = localStorage.getItem('bluej_scratch') || '';
+pad.addEventListener('input', (e) => {
+    localStorage.setItem('bluej_scratch', e.target.value);
+});
+</script><script>
+// Injecting Maegration Logs after the Reference/Glossary (index 0, 1)
+const MAEGRATION_DATA = [
+    {
+        title: "[LOG] PY101 Review Notes: Session 1",
+        body: `<h3>Welcome to PY101</h3>
+        <p><b>Date:</b> 2026-06-01 | <b>Author:</b> Maestro</p>
+        <ul>
+            <li>Course map overview: Unit 1 (First Program) to Unit 4 (Wrap-up).</li>
+            <li>Assessment: Reviews 1-3 (10% each, untimed) and Final Review (60%, timed).</li>
+            <li>Bonus: +10 points for on-time passing of all reviews.</li>
+        </ul>`
+    },
+    {
+        title: "[LOG] PY101 Review Notes: Session 2",
+        body: `<h3>Unit 1 & 2 Highlights</h3>
+        <ul>
+            <li>Unit 1: Basic instructions, printing, and simple math.</li>
+            <li>Unit 2: Precise math, user input, and type conversion.</li>
+            <li>Key focus: Planning effort efficiently for the 60% final review.</li>
+        </ul>`
+    }
+];
+
+// Insert after Lexicon and Syntax Guide (index 2)
+LESSONS.splice(2, 0, ...MAEGRATION_DATA);
+render();
+</script>
